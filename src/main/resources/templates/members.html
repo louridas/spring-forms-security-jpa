@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="head :: head">
+</head>
+<body>
+  <div class="container">
+    <table class="table">
+      <caption>Registered members</caption>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="member : ${members}">
+          <td th:text="${member.getName()}">Name</td>
+          <td th:text="${member.getSurname()}">Surname</td>
+          <td th:text="${member.getEmail()}">Email</td>
+          <td th:text="${member.getAge()}">Age</td>
+          <td th:text="${member.getAddress()}">Address</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+  <a th:href="@{/logout}">Sign out</a>
+  </div>
+</body>
+</html>

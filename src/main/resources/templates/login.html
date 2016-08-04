@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="head-login :: head">
+</head>
+<body>
+  <div class="container">
+    <div th:if="${param.error}">Invalid username and password.</div>
+    <div class="bg-warning col-sm-2" th:if="${param.logout}">
+      You have been logged out.</div>
+    <form class="form-signin" th:action="@{/login}" method="post">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <label class="sr-only">Username:</label> 
+      <input type="text"
+        name="username" class="form-control" placeholder="username"
+        required="true" autofocus="true" />
+      <label class="sr-only">Password:</label> 
+      <input type="password" name="password"
+        class="form-control" placeholder="password" required="true" />
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+        in</button>
+      <div class="register-suggestion">
+        <p>Not registered? Register <a th:href="@{register}">here</a>.</p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
