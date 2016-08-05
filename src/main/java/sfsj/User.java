@@ -37,6 +37,10 @@ public class User {
     @Size(min=8, max=30)
     private String plaintextPassword;
 
+    @Transient
+    @Size(min=8, max=30)
+    private String plaintextPasswordConf;
+    
     private String password;
 
     @Size(min=8, max=30)
@@ -95,6 +99,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public String getPlaintextPasswordConf() {
+        return plaintextPasswordConf;
+    }
+
+    public void setPlaintextPasswordConf(String plaintextPasswordConf) {
+        this.plaintextPasswordConf = plaintextPasswordConf;
     }
 
     public String getEmail() {

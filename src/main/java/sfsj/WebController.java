@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -64,6 +65,18 @@ public class WebController extends WebMvcConfigurerAdapter {
     public String checkPersonInfo(@Valid User user, 
             BindingResult bindingResult) {
 
+        /* 
+         * The validation fields in the user class do not check that
+         * the passwords match. Take care of that here.
+         */
+        if (!user.getPlaintextPassword().equals(
+                user.getPlaintextPasswordConf())) {
+            FieldError fe = new FieldError("user", 
+                    "plaintextPasswordConf", 
+                    "passwords do not match");
+            bindingResult.addError(fe);
+        }
+        
         if (bindingResult.hasErrors()) {
             logger.error(bindingResult.toString());
             return "register";
@@ -77,7 +90,8 @@ public class WebController extends WebMvcConfigurerAdapter {
         logger.info("About to save user...");
         userRepository.save(user);
         logger.info("Saved user.");
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        UserDetails userDetails = 
+                userDetailsService.loadUserByUsername(user.getUsername());
         UsernamePasswordAuthenticationToken auth = 
         	new UsernamePasswordAuthenticationToken(userDetails, 
         		userDetails.getPassword(), userDetails.getAuthorities());
