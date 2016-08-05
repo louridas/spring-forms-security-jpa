@@ -2,7 +2,7 @@ CREATE DATABASE coding_bootcamp;
 
 USE coding_bootcamp;
 
-CREATE USER 'codeboot'@'localhost' IDENTIFIED BY 'whatever';
+CREATE USER 'codeboot'@'localhost' IDENTIFIED BY 'bimrgrn5g4';
 
 GRANT ALL PRIVILEGES ON coding_bootcamp.* TO 'codeboot'@'localhost';
 
@@ -38,5 +38,3 @@ CREATE TABLE user_roles(
 );
 
 INSERT INTO roles(name) VALUES("user");
-
-SELECT * FROM users;
